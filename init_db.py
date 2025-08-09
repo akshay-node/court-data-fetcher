@@ -9,11 +9,12 @@ c.execute('''CREATE TABLE IF NOT EXISTS cases (
     parties TEXT,
     filing_date TEXT,
     hearing_date TEXT,
-    pdf_link TEXT
+    pdf_link TEXT,
+    UNIQUE(case_type, case_number, year) 
 )''')
 
 c.execute('''
-INSERT INTO cases (case_type, case_number, year, parties, filing_date, hearing_date, pdf_link)
+INSERT OR IGNORE INTO cases (case_type, case_number, year, parties, filing_date, hearing_date, pdf_link)
 VALUES (?, ?, ?, ?, ?, ?, ?)
 ''', (
     'W.P.(C)', '7425', '2019',
